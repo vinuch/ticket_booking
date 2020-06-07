@@ -328,15 +328,16 @@ class LoginScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30.0),
         child: SingleChildScrollView(
-                  child: Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               FlatButton(
                 padding: EdgeInsets.only(left: 0),
-                onPressed: () => { Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return OnboardingPage();
-                                  }))},
+                onPressed: () => {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return OnboardingPage();
+                  }))
+                },
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Icon(Icons.arrow_back),
@@ -425,10 +426,59 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Align(alignment: Alignment.topRight, child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0,),
-                child: Text('Forgot Password?', style: TextStyle(color: Color(0xFF9f9fa0), fontWeight: FontWeight.bold)),
-              ))
+              Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                      vertical: 16.0,
+                    ),
+                    child: Text('Forgot Password?',
+                        style: TextStyle(
+                            color: Color(0xFF9f9fa0),
+                            fontWeight: FontWeight.bold)),
+                  )),
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  FlatButton(
+                  
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(8.0)),
+                    onPressed: () => {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return LoginScreen();
+                      }))
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 100.0, vertical: 15.0),
+                      child: Text(
+                        'Login',
+                        style: TextStyle(fontSize: 18.0, fontFamily: 'Gilroy'),
+                      ),
+                    ),
+                    color: Color(0xFF367ffa),
+                  ),
+                  
+                  FlatButton(
+                    color: Color(0xFF367ffa),
+                    shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(8.0)),
+                    onPressed: () => print('Register'),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10.0, vertical: 15.0),
+                      child: Icon(Icons.fingerprint, color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Text('Dont have an Account yet? Sign up', style: TextStyle(fontSize: 12.0),),
+              )
             ],
           ),
         ),
