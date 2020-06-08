@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: OnboardingPage(),
+      home: FeedPage(),
     );
   }
 }
@@ -244,6 +245,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
+                                SizedBox(
+                                  height: 100.0,
+                                ),
                                 Text(
                                   'Next',
                                   style: TextStyle(
@@ -442,13 +446,12 @@ class LoginScreen extends StatelessWidget {
                 alignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlatButton(
-                  
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(8.0)),
                     onPressed: () => {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return LoginScreen();
+                        return FeedPage();
                       }))
                     },
                     child: Padding(
@@ -461,7 +464,6 @@ class LoginScreen extends StatelessWidget {
                     ),
                     color: Color(0xFF367ffa),
                   ),
-                  
                   FlatButton(
                     color: Color(0xFF367ffa),
                     shape: new RoundedRectangleBorder(
@@ -477,11 +479,332 @@ class LoginScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: Text('Dont have an Account yet? Sign up', style: TextStyle(fontSize: 12.0),),
+                child: Text(
+                  'Dont have an Account yet? Sign up',
+                  style: TextStyle(fontSize: 12.0),
+                ),
               )
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class FeedPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          IconButton(
+                            onPressed: () { Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return LoginScreen();
+                                  }));},
+                            icon: Icon(Icons.arrow_back_ios)
+
+                          ),
+                          SizedBox(
+                            width: 1.0,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Techie',
+                              style: TextStyle(
+                                  fontFamily: 'Google Sans',
+                                  letterSpacing: 1.5,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    FlatButton(
+                      onPressed: () {},
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'assets/icons/Menubar_1.png',
+                            width: 30.0,
+                          ),
+                          Image.asset(
+                            'assets/icons/Menubar_2.png',
+                            width: 30.0,
+                          ),
+                          Image.asset(
+                            'assets/icons/Menubar_3.png',
+                            width: 30.0,
+                          ),
+                        ],
+                      ),
+                    )
+                    // Column(S)
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              ButtonBar(alignment: MainAxisAlignment.start, children: <Widget>[
+                PlaceDropdown(),
+                DateDropdown(),
+              ]),
+              EventCard(banner: 'assets/images/banner_1.png',title: 'Dev Conference', venue:'Stirufuel Theater'),
+              EventCard(banner: 'assets/images/banner_2.png',title: 'Adobe MAX Conference', venue:'stirufuel theater'),
+              EventCard(banner: 'assets/images/banner_3.png',title: 'Codela Hackathon', venue:'Stirufuel Theater'),
+              EventCard(banner: 'assets/images/banner_4.png',title: 'Jax Cyberlympics', venue:'Stirufuel Theater'),
+              
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class EventCard extends StatelessWidget {
+    final String banner;
+    final String title;
+    final String venue;
+   EventCard({
+    Key key,
+    this.banner,
+    this.title,
+    this.venue
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5.0,
+      margin: EdgeInsets.symmetric(vertical: 20.0),
+      child: Container(
+        height: 350.0,
+        child: Column(
+          children: <Widget>[
+            Image.asset(
+              banner,
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Text(
+                    title,
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                        fontFamily: 'Gilroy'),
+                  ),
+                  Text(
+                    'Thur, Mar 26, 6:00pm $venue',
+                    style: TextStyle(
+                        color: Color(0xFF666666),
+                        fontFamily: 'Google Sans',
+                        fontSize: 17.0),
+                  ),
+                  new Divider(
+                    color: Colors.black,
+                  ),
+                  ButtonBar(
+                      alignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        
+                        SizedBox(
+                          width: 50,
+                          child: FlatButton(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 0),
+                            onPressed: () {},
+                            child: Row(
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/icons/save.png',
+                                  width: 10.0,
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  'Save',
+                                  style: TextStyle(fontSize: 12.0, fontFamily: 'Google Sans',),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 50,
+                          child: FlatButton(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 0),
+                            onPressed: () {},
+                            child: Row(
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/icons/share.png',
+                                  width: 10.0,
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  'Share',
+                                  style: TextStyle(fontSize: 12.0, fontFamily: 'Google Sans',),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 80,
+                          child: FlatButton(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 0),
+                            onPressed: () {},
+                            child: Row(
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/icons/comment.png',
+                                  width: 10.0,
+                                ),
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  'Comment',
+                                  style: TextStyle(fontSize: 12.0, fontFamily: 'Google Sans',),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ])
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlaceDropdown extends StatefulWidget {
+  @override
+  _PlaceDropdownState createState() =>
+      _PlaceDropdownState(['lagos', 'owerri', 'enugu'], 'lagos', 'Somewhere');
+}
+
+class _PlaceDropdownState extends State<PlaceDropdown> {
+  List<String> _locations; // Option 2
+  String _selectedLocation; // Option 2
+  String _hintText; // Option 2
+
+  _PlaceDropdownState(this._locations, this._selectedLocation, this._hintText);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+
+      // dropdown below..
+      child: FlatButton(
+        shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(4.0)),
+        color: Color(0xFF86b2fc),
+        onPressed: () {},
+        child: DropdownButton<String>(
+            style: TextStyle(color: Colors.white, fontFamily: 'Google Sans'),
+            value: _selectedLocation,
+            icon: Icon(
+              Icons.arrow_drop_down,
+              color: Colors.white,
+              size: 18.0,
+            ),
+            iconSize: 42,
+            underline: SizedBox(),
+            onChanged: (String newValue) {
+              setState(() {
+                _selectedLocation = newValue;
+              });
+            },
+            items: _locations.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList()),
+      ),
+    );
+  }
+}
+
+class DateDropdown extends StatefulWidget {
+  @override
+  _DateDropdownState createState() =>
+      _DateDropdownState(['Any date'], 'Any date', 'Somewhere');
+}
+
+class _DateDropdownState extends State<DateDropdown> {
+  List<String> _locations; // Option 2
+  String _selectedLocation; // Option 2
+  String _hintText; // Option 2
+
+  _DateDropdownState(this._locations, this._selectedLocation, this._hintText);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+
+      // dropdown below..
+      child: FlatButton(
+        shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(4.0)),
+        color: Color(0xFF86b2fc),
+        onPressed: () {},
+        child: DropdownButton<String>(
+            style: TextStyle(color: Colors.white, fontFamily: 'Google Sans'),
+            value: _selectedLocation,
+            icon: Icon(
+              Icons.arrow_drop_down,
+              color: Colors.white,
+              size: 18.0,
+            ),
+            iconSize: 42,
+            underline: SizedBox(),
+            onChanged: (String newValue) {
+              setState(() {
+                _selectedLocation = newValue;
+              });
+            },
+            items: _locations.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList()),
       ),
     );
   }
